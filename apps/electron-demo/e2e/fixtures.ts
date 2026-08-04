@@ -1,10 +1,11 @@
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { _electron as electron, expect, test as base, type ElectronApplication, type Page } from "@playwright/test";
 
-const here = path.dirname(fileURLToPath(import.meta.url));
+// This package has no "type": "module", so Playwright loads the specs as
+// CommonJS; `import.meta.url` is unavailable there, but `__dirname` is.
+const here = __dirname;
 const appRoot = path.resolve(here, "..");
 const mainEntry = path.join(appRoot, "dist-electron", "main.js");
 
