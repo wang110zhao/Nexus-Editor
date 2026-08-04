@@ -7,6 +7,10 @@ dist-electron/
 release/
 *.tsbuildinfo
 
+# E2E artifacts
+playwright-report/
+test-results/
+
 # Logs
 *.log
 npm-debug.log*
