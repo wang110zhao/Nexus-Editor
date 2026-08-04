@@ -1,5 +1,5 @@
 import path from "node:path";
-import { defineConfig } from "vitest/config";
+import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
   resolve: {
@@ -19,6 +19,9 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
-    setupFiles: ["./vitest.setup.ts"]
+    setupFiles: ["./vitest.setup.ts"],
+    // The Playwright specs under apps/electron-demo/e2e are executed by
+    // Playwright, not Vitest; exclude them so `pnpm test` stays green.
+    exclude: [...configDefaults.exclude, "apps/electron-demo/e2e/**"]
   }
 });
